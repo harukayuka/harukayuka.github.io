@@ -1,0 +1,115 @@
+/* Import font dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@300;400&display=swap');
+
+/* Variabel Warna (mudah diubah) */
+:root {
+    --warna-latar: #f4f4f4;
+    --warna-kartu: #ffffff;
+    --warna-teks-utama: #333333;
+    --warna-teks-sekunder: #777777;
+    --warna-bayangan: rgba(0, 0, 0, 0.1);
+    --font-judul: 'Merriweather', serif;
+    --font-isi: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: var(--font-isi);
+    background-color: var(--warna-latar);
+    color: var(--warna-teks-utama);
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--warna-kartu);
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    font-family: var(--font-judul);
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--warna-teks-sekunder);
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+}
+
+.karya {
+    background-color: var(--warna-kartu);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--warna-bayangan);
+    overflow: hidden; /* Agar gambar tidak keluar dari sudut rounded */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.karya:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--warna-bayangan);
+}
+
+.karya img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover; /* Gambar akan terpotong agar pas tanpa distorsi */
+    display: block;
+}
+
+.karya .teks-karya {
+    padding: 1.5rem;
+}
+
+.karya h2 {
+    font-family: var(--font-judul);
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.karya .kutipan {
+    font-family: var(--font-judul);
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #ccc;
+    padding-left: 1rem;
+}
+
+.karya .penulis {
+    font-weight: bold;
+    color: var(--warna-teks-utama);
+}
+
+.karya .tanggal {
+    font-size: 0.9rem;
+    color: var(--warna-teks-sekunder);
+    margin-top: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Media Query untuk tampilan di mobile */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .karya img {
+        height: 200px;
+    }
+}
