@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<article class="karya-tunggal">
+    <h2>{{ page.title }}</h2>
+    <p class="tanggal">{{ page.date | date: "%d %B %Y" }}</p>
+    
+    {% if page.image %}
+        <img src="{{ page.image }}" alt="{{ page.title }}">
+    {% endif %}
+    
+    <div class="konten-karya">
+        {{ content }}
+    </div>
+</article>

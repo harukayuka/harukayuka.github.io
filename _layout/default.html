@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul halaman akan dinamis -->
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">{{ site.title }}</a></h1>
+        <p>{{ site.description }}</p>
+    </header>
+
+    <main>
+        <!-- Konten dari index.html atau dari _posts akan muncul di sini -->
+        {{ content }}
+    </main>
+
+    <footer>
+        <p>&copy; {% assign year = "now" | date: "%Y" %} {{ site.author }}</p>
+    </footer>
+
+</body>
+</html>
