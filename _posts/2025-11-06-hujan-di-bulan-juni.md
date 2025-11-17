@@ -1,8 +1,0 @@
----
-layout: post
-title: "Hujan di Bulan Juni"
-author: "Sapardi Djoko Damono"
-image: /assets/images/gambar1.jpg
----
-
-"Tak ada yang lebih tabah dari hujan bulan Juni. Dirahasiakannya rintik rindunya kepada pohon berbunga itu."
