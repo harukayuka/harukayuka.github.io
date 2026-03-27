@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CV — harukayuka</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0c10;
+    --surface: #13131a;
+    --surface2: #1a1a26;
+    --accent: #7fffd4;
+    --accent2: #c678dd;
+    --text: #e8e8f0;
+    --muted: #6b6b88;
+    --border: #2a2a3d;
+    --line: 1px solid var(--border);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: .5;
+  }
+
+  /* grid lines */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: .3;
+    pointer-events: none;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 36px;
+    border-bottom: var(--line);
+    animation: fadeUp .7s ease both;
+  }
+
+  .header-left { }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--text);
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: .05em;
+  }
+
+  .header-right {
+    text-align: right;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .header-right a {
+    color: var(--accent2);
+    text-decoration: none;
+    display: block;
+  }
+  .header-right a:hover { text-decoration: underline; }
+
+  /* ─── SECTIONS ─── */
+  section {
+    margin-top: 44px;
+    animation: fadeUp .7s ease both;
+  }
+
+  section:nth-child(2) { animation-delay: .1s; }
+  section:nth-child(3) { animation-delay: .2s; }
+  section:nth-child(4) { animation-delay: .3s; }
+  section:nth-child(5) { animation-delay: .4s; }
+  section:nth-child(6) { animation-delay: .5s; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* about */
+  .about-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #b8b8d0;
+    max-width: 600px;
+  }
+
+  /* skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    border: var(--line);
+    padding: 16px 18px;
+    border-radius: 4px;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .skill-group:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .skill-group-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  /* projects */
+  .projects { display: flex; flex-direction: column; gap: 16px; }
+
+  .project-card {
+    background: var(--surface);
+    border: var(--line);
+    border-radius: 4px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    transition: border-color .2s, transform .2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent2);
+    transform: translateX(4px);
+  }
+
+  .project-name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: 6px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .project-lang {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    height: fit-content;
+  }
+
+  /* education */
+  .edu-timeline { display: flex; flex-direction: column; }
+
+  .edu-connector {
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    margin-left: 21px;
+    opacity: .4;
+  }
+
+  .edu-card {
+    background: var(--surface);
+    border: var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color .2s;
+  }
+
+  .edu-card--active { border-color: var(--accent); }
+  .edu-card--active .edu-icon { border-color: var(--accent); }
+
+  .edu-body { flex: 1; }
+
+  .edu-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+
+  .edu-badge--done {
+    background: var(--surface2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .edu-badge--active {
+    background: rgba(127,255,212,.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .edu-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .edu-title { font-size: 15px; font-weight: 700; }
+  .edu-sub { font-size: 12px; color: var(--muted); margin-top: 3px; font-family: 'Space Mono', monospace; }
+
+  /* contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .contact-item {
+    background: var(--surface);
+    border: var(--line);
+    border-radius: 4px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color .2s;
+  }
+
+  .contact-item:hover { border-color: var(--accent); }
+
+  .contact-icon {
+    font-size: 18px;
+    width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .contact-value { font-size: 13px; }
+
+  /* footer */
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    animation: fadeUp .7s ease .6s both;
+  }
+
+  .footer-dot { color: var(--accent); }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* accent glow blob */
+  .glow-blob {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-blob-1 {
+    background: var(--accent);
+    top: -100px;
+    right: -100px;
+  }
+
+  .glow-blob-2 {
+    background: var(--accent2);
+    bottom: 100px;
+    left: -200px;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 60px; }
+    header { grid-template-columns: 1fr; }
+    .header-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-blob glow-blob-1"></div>
+<div class="glow-blob glow-blob-2"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div class="tag">curriculum vitae</div>
+      <h1>haruka<span>yuka</span></h1>
+      <p class="subtitle">// student · developer · open-source contributor</p>
+    </div>
+    <div class="header-right">
+      <span>Tangerang, Indonesia</span>
+      <a href="/cdn-cgi/l/email-protection#f39b92818698928a869892c2cab3949e929a9fdd909c9e"><span class="__cf_email__" data-cfemail="264e4754534d475f534d47171f66414b474f4a0845494b">[email&#160;protected]</span></a>
+      <a href="https://github.com/harukayuka" target="_blank">github.com/harukayuka</a>
+      <a href="https://twitter.com/r_internight" target="_blank">@r_internight</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="section-label">Tentang Saya</div>
+    <p class="about-text">
+      Seorang pelajar SMA yang antusias dalam dunia pemrograman, khususnya Python.
+      Saya percaya bahwa belajar coding bukan hanya soal akademik — melainkan cara
+      membangun solusi nyata. Terbuka untuk kolaborasi open-source dan selalu
+      semangat mengeksplorasi teknologi baru.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Skills & Tools</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Bahasa Pemrograman</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Developer Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Codex OpenAI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Creative Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Canva</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Self-taught</span>
+          <span class="skill-tag">Kolaborasi</span>
+          <span class="skill-tag">Open-source</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-label">Proyek</div>
+    <div class="projects">
+
+      <a class="project-card" href="https://github.com/harukayuka/perpus" target="_blank">
+        <div>
+          <div class="project-name">Perpus — Sistem Perpustakaan</div>
+          <div class="project-desc">Aplikasi manajemen perpustakaan berbasis Python dengan fitur pengelolaan buku, peminjaman, data pengguna, dan autentikasi password. Dibangun dengan arsitektur modular (GUI, database, logika bisnis terpisah).</div>
+        </div>
+        <span class="project-lang">Python</span>
+      </a>
+
+      <a class="project-card" href="https://harukayuka.github.io" target="_blank">
+        <div>
+          <div class="project-name">Personal Website</div>
+          <div class="project-desc">Portofolio dan halaman bio pribadi yang dihosting di GitHub Pages. Didesain dengan CSS custom dan HTML semantik.</div>
+        </div>
+        <span class="project-lang">CSS / HTML</span>
+      </a>
+
+      <a class="project-card" href="https://github.com/harukayuka/proxy-grab" target="_blank">
+        <div>
+          <div class="project-name">Proxy Grab</div>
+          <div class="project-desc">Tools pengambilan proxy secara otomatis — mencerminkan ketertarikan di bidang jaringan dan otomasi.</div>
+        </div>
+        <span class="project-lang">Python</span>
+      </a>
+
+      <a class="project-card" href="https://github.com/harukayuka/museum-kata" target="_blank">
+        <div>
+          <div class="project-name">Museum Kata</div>
+          <div class="project-desc">Proyek eksperimental yang menggabungkan minat di bidang bahasa dan pemrograman.</div>
+        </div>
+        <span class="project-lang">Exploratory</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Pendidikan</div>
+    <div class="edu-timeline">
+
+      <div class="edu-card">
+        <div class="edu-icon">🏫</div>
+        <div class="edu-body">
+          <div class="edu-badge edu-badge--done">Lulus</div>
+          <div class="edu-title">MIN 1 Tangerang</div>
+          <div class="edu-sub">Madrasah Ibtidaiyah Negeri &nbsp;·&nbsp; Tangerang, Indonesia</div>
+        </div>
+      </div>
+
+      <div class="edu-connector"></div>
+
+      <div class="edu-card">
+        <div class="edu-icon">📖</div>
+        <div class="edu-body">
+          <div class="edu-badge edu-badge--done">Lulus</div>
+          <div class="edu-title">SMQ-SMP Umar bin Abdul Aziz</div>
+          <div class="edu-sub">Sekolah Menengah Al-Quran &nbsp;·&nbsp; Tangerang, Indonesia</div>
+        </div>
+      </div>
+
+      <div class="edu-connector"></div>
+
+      <div class="edu-card edu-card--active">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-body">
+          <div class="edu-badge edu-badge--active">Aktif</div>
+          <div class="edu-title">SMQ-SMA Umar bin Abdul Aziz</div>
+          <div class="edu-sub">Sekolah Menengah Al-Quran &nbsp;·&nbsp; Tangerang, Indonesia</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section>
+    <div class="section-label">Kontak</div>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:harukayuka19@gmail.com">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">harukayuka19@gmail.com</div>
+          <div class="contact-value" style="opacity:.6;font-size:11px;font-family:'Space Mono',monospace">ridhoip234@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://github.com/harukayuka" target="_blank">
+        <div class="contact-icon">🐙</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">github.com/harukayuka</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://instagram.com/r_internight" target="_blank">
+        <div class="contact-icon">📸</div>
+        <div>
+          <div class="contact-label">Instagram</div>
+          <div class="contact-value">@r_internight</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://harukayuka.github.io" target="_blank">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div class="contact-label">Website</div>
+          <div class="contact-value">harukayuka.github.io</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span><span class="footer-dot">◆</span> harukayuka &nbsp;·&nbsp; Tangerang, Indonesia</span>
+    <span>github.com/harukayuka</span>
+  </footer>
+
+</div>
+</body>
+</html>
