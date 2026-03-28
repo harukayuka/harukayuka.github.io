@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CV — M. Fatih Alayyubi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:      #0c0c10;
+    --surface: #13131a;
+    --surface2:#1a1a26;
+    --accent:  #7fffd4;
+    --accent2: #c678dd;
+    --text:    #e8e8f0;
+    --muted:   #6b6b88;
+    --border:  #2a2a3d;
+    --line:    1px solid var(--border);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: .45;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: .25; pointer-events: none;
+  }
+
+  .blob {
+    position: fixed; width: 520px; height: 520px;
+    border-radius: 50%; filter: blur(130px);
+    opacity: .055; pointer-events: none; z-index: 0;
+  }
+  .blob-1 { background: var(--accent);  top: -120px; right: -120px; }
+  .blob-2 { background: var(--accent2); bottom: 80px; left: -180px; }
+
+  .page {
+    max-width: 880px; margin: 0 auto;
+    padding: 60px 40px 90px;
+    position: relative; z-index: 1;
+  }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .page > * { animation: up .65s ease both; }
+  .page > *:nth-child(1) { animation-delay: .00s; }
+  .page > *:nth-child(2) { animation-delay: .08s; }
+  .page > *:nth-child(3) { animation-delay: .16s; }
+  .page > *:nth-child(4) { animation-delay: .24s; }
+  .page > *:nth-child(5) { animation-delay: .32s; }
+  .page > *:nth-child(6) { animation-delay: .40s; }
+  .page > *:nth-child(7) { animation-delay: .48s; }
+  .page > *:nth-child(8) { animation-delay: .56s; }
+
+  /* HEADER */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end; gap: 24px;
+    padding-bottom: 36px;
+    border-bottom: var(--line);
+  }
+
+  .cv-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    padding: 3px 10px; border-radius: 2px; margin-bottom: 14px;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-weight: 800; line-height: 1; letter-spacing: -.025em;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    margin-top: 10px; letter-spacing: .04em;
+  }
+
+  .header-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-align: right; line-height: 2;
+  }
+  .header-meta a { color: var(--accent2); text-decoration: none; display: block; }
+  .header-meta a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section { margin-top: 48px; }
+
+  .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* BIODATA */
+  .biodata-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+  .bd-row {
+    display: grid; grid-template-columns: 148px 1fr;
+    gap: 6px; align-items: baseline;
+    padding: 9px 0; border-bottom: var(--line);
+  }
+  .bd-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9.5px; text-transform: uppercase;
+    letter-spacing: .13em; color: var(--muted);
+  }
+  .bd-value { font-size: 13.5px; font-weight: 600; }
+  .bd-value.hi { color: var(--accent); }
+
+  /* ABOUT */
+  .about-text { font-size: 15px; line-height: 1.85; color: #b8b8d0; max-width: 620px; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 12px; }
+  .skill-card {
+    background: var(--surface); border: var(--line);
+    border-radius: 4px; padding: 16px 18px;
+    transition: border-color .2s, transform .2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-card-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 9.5px; text-transform: uppercase;
+    letter-spacing: .16em; color: var(--muted); margin-bottom: 10px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag-item {
+    font-family: 'Space Mono', monospace; font-size: 11.5px;
+    background: var(--surface2); border: var(--line);
+    color: var(--text); padding: 3px 9px; border-radius: 2px;
+  }
+
+  /* PROJECTS */
+  .projects { display: flex; flex-direction: column; gap: 14px; }
+  .proj-card {
+    background: var(--surface); border: var(--line);
+    border-radius: 4px; padding: 20px 22px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 12px; align-items: start;
+    text-decoration: none; color: inherit;
+    transition: border-color .2s, transform .2s;
+  }
+  .proj-card:hover { border-color: var(--accent2); transform: translateX(4px); }
+  .proj-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .proj-desc { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+  .proj-lang {
+    font-family: 'Space Mono', monospace; font-size: 10.5px;
+    color: var(--accent2); border: 1px solid var(--accent2);
+    padding: 3px 8px; border-radius: 2px;
+    white-space: nowrap; height: fit-content;
+  }
+
+  /* EDUCATION */
+  .edu-timeline { display: flex; flex-direction: column; }
+  .edu-connector {
+    width: 2px; height: 20px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    margin-left: 21px; opacity: .35;
+  }
+  .edu-card {
+    background: var(--surface); border: var(--line);
+    border-radius: 4px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .edu-card.active { border-color: var(--accent); }
+  .edu-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--surface2); border: var(--line);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .edu-card.active .edu-icon { border-color: var(--accent); }
+  .edu-icon svg { width: 20px; height: 20px; fill: white; opacity: .7; }
+  .edu-body { flex: 1; }
+  .edu-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: 2px 8px; border-radius: 2px; margin-bottom: 5px;
+  }
+  .badge-done { background: var(--surface2); color: var(--muted); border: var(--line); }
+  .badge-active { background: rgba(127,255,212,.08); color: var(--accent); border: 1px solid var(--accent); }
+  .edu-title { font-size: 14.5px; font-weight: 700; }
+  .edu-sub { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 12px; }
+  .contact-card {
+    background: var(--surface); border: var(--line);
+    border-radius: 4px; padding: 15px 17px;
+    display: flex; align-items: center; gap: 13px;
+    text-decoration: none; color: var(--text);
+    transition: border-color .2s;
+  }
+  .contact-card:hover { border-color: var(--accent); }
+  .c-icon { width: 30px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .c-icon svg { width: 19px; height: 19px; fill: white; opacity: .72; transition: opacity .2s; }
+  .contact-card:hover .c-icon svg { opacity: 1; }
+  .c-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9.5px; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--muted); margin-bottom: 3px;
+  }
+  .c-value { font-size: 12.5px; }
+  .c-value2 { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; margin-top: 2px; }
+
+  /* FOOTER */
+  footer {
+    margin-top: 64px; padding-top: 22px;
+    border-top: var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--muted);
+  }
+  .footer-dot { color: var(--accent); }
+
+  @media (max-width: 620px) {
+    .page { padding: 36px 18px 60px; }
+    header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .biodata-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="cv-tag">curriculum vitae</div>
+      <h1>haruka<em>yuka</em></h1>
+      <p class="subtitle">// student · developer · open-source contributor</p>
+    </div>
+    <div class="header-meta">
+      <span>Tangerang, Indonesia</span>
+      <a href="mailto:harukayuka19&#64;gmail.com">harukayuka19&#64;gmail.com</a>
+      <a href="https://github.com/harukayuka" target="_blank">github.com/harukayuka</a>
+      <a href="https://instagram.com/r_internight" target="_blank">&#64;r_internight</a>
+    </div>
+  </header>
+
+  <!-- BIODATA -->
+  <div class="section">
+    <div class="label">Biodata</div>
+    <div class="biodata-grid">
+
+      <div class="bd-row">
+        <span class="bd-label">Nama Lengkap</span>
+        <span class="bd-value hi">M. Fatih Alayyubi</span>
+      </div>
+      <div class="bd-row">
+        <span class="bd-label">Nama Pengguna</span>
+        <span class="bd-value">harukayuka</span>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-label">Tempat Lahir</span>
+        <span class="bd-value">Tangerang</span>
+      </div>
+      <div class="bd-row">
+        <span class="bd-label">Tanggal Lahir</span>
+        <span class="bd-value">23 September 2008</span>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-label">Usia</span>
+        <span class="bd-value">17 Tahun</span>
+      </div>
+      <div class="bd-row">
+        <span class="bd-label">Kewarganegaraan</span>
+        <span class="bd-value">Indonesia</span>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-label">Agama</span>
+        <span class="bd-value">Islam</span>
+      </div>
+      <div class="bd-row">
+        <span class="bd-label">Domisili</span>
+        <span class="bd-value">Tangerang, Banten</span>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-label">Status</span>
+        <span class="bd-value">Pelajar Aktif</span>
+      </div>
+      <div class="bd-row">
+        <span class="bd-label">Website</span>
+        <span class="bd-value hi">harukayuka.github.io</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="label">Tentang Saya</div>
+    <p class="about-text">
+      Seorang pelajar SMA yang belajar coding secara otodidak, dengan fokus utama pada Python.
+      Percaya bahwa teknologi bukan sekadar pelajaran akademik — melainkan alat nyata untuk
+      membangun solusi dan berkontribusi pada komunitas open-source. Selalu antusias
+      menjelajahi hal baru, dari pengembangan bot hingga otomasi dan pengolahan data.
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="label">Skills &amp; Tools</div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-title">Bahasa Pemrograman</div>
+        <div class="tags">
+          <span class="tag-item">Python</span>
+          <span class="tag-item">HTML</span>
+          <span class="tag-item">CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-title">Developer Tools</div>
+        <div class="tags">
+          <span class="tag-item">VS Code</span>
+          <span class="tag-item">Git</span>
+          <span class="tag-item">GitHub</span>
+          <span class="tag-item">Codex OpenAI</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-title">Creative Tools</div>
+        <div class="tags">
+          <span class="tag-item">Canva</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-title">Soft Skills</div>
+        <div class="tags">
+          <span class="tag-item">Self-taught</span>
+          <span class="tag-item">Kolaborasi</span>
+          <span class="tag-item">Open-source</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="label">Proyek</div>
+    <div class="projects">
+
+      <a class="proj-card" href="https://github.com/harukayuka/perpus" target="_blank">
+        <div>
+          <div class="proj-name">Perpus — Sistem Perpustakaan</div>
+          <div class="proj-desc">Aplikasi manajemen perpustakaan berbasis Python dengan fitur pengelolaan buku, peminjaman, data pengguna, dan autentikasi password. Dibangun dengan arsitektur modular.</div>
+        </div>
+        <span class="proj-lang">Python</span>
+      </a>
+
+      <a class="proj-card" href="https://harukayuka.github.io" target="_blank">
+        <div>
+          <div class="proj-name">Personal Website / CV</div>
+          <div class="proj-desc">Halaman CV &amp; portofolio pribadi yang dihosting di GitHub Pages. Dibangun dengan HTML &amp; CSS murni tanpa framework.</div>
+        </div>
+        <span class="proj-lang">HTML / CSS</span>
+      </a>
+
+      <a class="proj-card" href="https://github.com/harukayuka/proxy-grab" target="_blank">
+        <div>
+          <div class="proj-name">Proxy Grab</div>
+          <div class="proj-desc">Tools pengambilan proxy secara otomatis — mencerminkan ketertarikan di bidang jaringan dan otomasi web.</div>
+        </div>
+        <span class="proj-lang">Python</span>
+      </a>
+
+      <a class="proj-card" href="https://github.com/harukayuka/museum-kata" target="_blank">
+        <div>
+          <div class="proj-name">Museum Kata</div>
+          <div class="proj-desc">Proyek eksperimental yang menggabungkan minat di bidang bahasa dan pemrograman.</div>
+        </div>
+        <span class="proj-lang">Exploratory</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="label">Pendidikan</div>
+    <div class="edu-timeline">
+
+      <div class="edu-card">
+        <div class="edu-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        </div>
+        <div class="edu-body">
+          <div class="edu-badge badge-done">Lulus</div>
+          <div class="edu-title">MIN 1 Tangerang</div>
+          <div class="edu-sub">Madrasah Ibtidaiyah Negeri &nbsp;·&nbsp; Tangerang</div>
+        </div>
+      </div>
+
+      <div class="edu-connector"></div>
+
+      <div class="edu-card">
+        <div class="edu-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+        </div>
+        <div class="edu-body">
+          <div class="edu-badge badge-done">Lulus</div>
+          <div class="edu-title">SMQ-SMP Umar bin Abdul Aziz</div>
+          <div class="edu-sub">Sekolah Menengah Al-Quran &nbsp;·&nbsp; Tangerang</div>
+        </div>
+      </div>
+
+      <div class="edu-connector"></div>
+
+      <div class="edu-card active">
+        <div class="edu-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        </div>
+        <div class="edu-body">
+          <div class="edu-badge badge-active">Aktif</div>
+          <div class="edu-title">SMQ-SMA Umar bin Abdul Aziz</div>
+          <div class="edu-sub">Sekolah Menengah Al-Quran &nbsp;·&nbsp; Tangerang</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="label">Kontak</div>
+    <div class="contact-grid">
+
+      <a class="contact-card" href="mailto:harukayuka19&#64;gmail.com">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.897 4 2 4.897 2 6v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 5.16-8-5.16V6h16zM4 18V9.044l7.386 4.769a1 1 0 0 0 1.228 0L20 9.044 20.002 18H4z"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Email</div>
+          <div class="c-value">harukayuka19&#64;gmail.com</div>
+          <div class="c-value2">ridhoip234&#64;gmail.com</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://github.com/harukayuka" target="_blank">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </div>
+        <div>
+          <div class="c-label">GitHub</div>
+          <div class="c-value">harukayuka</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://instagram.com/r_internight" target="_blank">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Instagram</div>
+          <div class="c-value">r_internight</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://x.com/r_internight" target="_blank">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div>
+          <div class="c-label">X / Twitter</div>
+          <div class="c-value">r_internight</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://harukayuka.github.io" target="_blank">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Website</div>
+          <div class="c-value">harukayuka.github.io</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span><span class="footer-dot">◆</span> M. Fatih Alayyubi &nbsp;·&nbsp; Tangerang, Indonesia</span>
+    <span>github.com/harukayuka</span>
+  </footer>
+
+</div>
+</body>
+</html>
